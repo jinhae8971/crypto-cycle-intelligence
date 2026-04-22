@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-04-22T07:49:11.381760+00:00",
+  "generated_at": "2026-04-22T07:53:14.132130+00:00",
   "ccs": {
-    "composite": 29.77,
+    "composite": 29.76,
     "phase": "Accumulation",
     "emoji": "🌱",
     "color": "#3a8891",
@@ -11,7 +11,7 @@
       "sentiment": 27.5,
       "derivatives": null,
       "macro": null,
-      "technical": 48.61
+      "technical": 48.55
     },
     "indicators": [
       {
@@ -32,8 +32,8 @@
       },
       {
         "metric": "mayer_multiple",
-        "raw": 0.9090427017835258,
-        "score": 6.815168861470357,
+        "raw": 0.9088363464758458,
+        "score": 6.802271654740358,
         "dimension": "valuation",
         "bottom": 0.8,
         "top": 2.4
@@ -80,16 +80,16 @@
       },
       {
         "metric": "weekly_rsi",
-        "raw": 45.99344071842373,
-        "score": 29.078983124406776,
+        "raw": 45.9731512324607,
+        "score": 29.04209314992855,
         "dimension": "technical",
         "bottom": 30,
         "top": 85
       },
       {
         "metric": "daily_rsi",
-        "raw": 65.05309397069074,
-        "score": 77.89576437931275,
+        "raw": 65.01907388767165,
+        "score": 77.82016419482589,
         "dimension": "technical",
         "bottom": 30,
         "top": 75
@@ -573,15 +573,15 @@
     "crosses": []
   },
   "technicals": {
-    "current_price": 78071.50262163972,
-    "change_24h_pct": 2.254413766967711,
-    "sma_200": 85883.2071017839,
-    "mayer_multiple": 0.9090427017835258,
-    "sma_111": 75598.88365965363,
-    "sma_350_x2": 193741.54723983275,
-    "pi_cycle_ratio": 0.3902048101539611,
-    "daily_rsi": 65.05309397069074,
-    "weekly_rsi": 45.99344071842373
+    "current_price": 78053.6992643226,
+    "change_24h_pct": 2.2310957596998193,
+    "sma_200": 85883.11808499732,
+    "mayer_multiple": 0.9088363464758458,
+    "sma_111": 75598.72326904717,
+    "sma_350_x2": 193741.44550636236,
+    "pi_cycle_ratio": 0.3902041871911426,
+    "daily_rsi": 65.01907388767165,
+    "weekly_rsi": 45.9731512324607
   },
   "funding_rate": null,
   "bgeometrics": {
@@ -708,8 +708,8 @@
       "price": 76350.25202878818
     },
     {
-      "ts": "2026-04-22T07:48:52+00:00",
-      "price": 78071.50262163972
+      "ts": "2026-04-22T07:53:04+00:00",
+      "price": 78053.6992643226
     }
   ]
 }
