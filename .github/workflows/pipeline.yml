@@ -65,6 +65,12 @@ jobs:
           TZ: "Asia/Seoul"
         run: python scripts/run_pipeline.py
 
+      - name: Run backtest
+        env:
+          TZ: "Asia/Seoul"
+        run: python scripts/run_backtest.py
+        continue-on-error: true   # backtest failure should not break the pipeline
+
       - name: Commit JSON artifacts
         run: |
           git config user.name  "cci-bot[bot]"
