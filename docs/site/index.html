@@ -93,11 +93,9 @@ const {
 } = Recharts;
 
 // ── Configuration ──
-// Auto-detect data path relative to the HTML location
-// When served from /docs/site/index.html, data lives at /data/latest.json
-const DATA_BASE = location.pathname.includes("/docs/site/")
-  ? location.pathname.replace(/docs\/site\/.*$/, "data/")
-  : "../../data/";
+// On GitHub Pages, data/ is copied next to index.html by the workflow.
+// Locally, we fall back to sibling data/ as well.
+const DATA_BASE = "./data/";
 
 const COLORS = {
   bg: '#0a0e1a', bgCard: '#111827', border: '#1f2937',
