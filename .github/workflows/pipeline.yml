@@ -77,6 +77,13 @@ jobs:
             git push
           fi
 
+      - name: Stage data JSON for Pages
+        run: |
+          # Copy data/ into docs/site/ so Pages can serve JSON to the dashboard
+          mkdir -p docs/site/data
+          cp -r data/* docs/site/data/ 2>/dev/null || true
+          ls -la docs/site/data/
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
