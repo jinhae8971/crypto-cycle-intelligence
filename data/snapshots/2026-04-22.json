@@ -1,23 +1,23 @@
 {
-  "generated_at": "2026-04-22T19:07:18.312320+00:00",
+  "generated_at": "2026-04-22T22:57:54.670339+00:00",
   "ccs": {
-    "composite": 30.22,
+    "composite": 30.07,
     "phase": "Accumulation",
     "emoji": "🌱",
     "color": "#3a8891",
     "dimensions": {
-      "valuation": 25.93,
+      "valuation": 25.89,
       "onchain": 22.27,
       "sentiment": 27.5,
       "derivatives": null,
       "macro": null,
-      "technical": 50.7
+      "technical": 50.01
     },
     "indicators": [
       {
         "metric": "pi_cycle_ratio",
-        "raw": 0.3901815750192881,
-        "score": 23.772696877411008,
+        "raw": 0.3901729653761825,
+        "score": 23.771620672022813,
         "dimension": "valuation",
         "bottom": 0.2,
         "top": 1.0
@@ -32,8 +32,8 @@
       },
       {
         "metric": "mayer_multiple",
-        "raw": 0.9175632619926589,
-        "score": 7.34770387454118,
+        "raw": 0.914690225544963,
+        "score": 7.168139096560187,
         "dimension": "valuation",
         "bottom": 0.8,
         "top": 2.4
@@ -80,16 +80,16 @@
       },
       {
         "metric": "weekly_rsi",
-        "raw": 46.818141601232135,
-        "score": 30.57843927496752,
+        "raw": 46.542883070184935,
+        "score": 30.077969218518064,
         "dimension": "technical",
         "bottom": 30,
         "top": 85
       },
       {
         "metric": "daily_rsi",
-        "raw": 66.4023205592471,
-        "score": 80.89404568721578,
+        "raw": 65.95915934775508,
+        "score": 79.90924299501128,
         "dimension": "technical",
         "bottom": 30,
         "top": 75
@@ -103,11 +103,11 @@
     }
   },
   "global_market": {
-    "total_mcap_usd": 2713924867959.808,
-    "total_vol_24h": 119189905424.05347,
-    "btc_dominance": 58.17885840598931,
-    "eth_dominance": 10.634845323198833,
-    "mcap_change_24h": 3.8176642814195443,
+    "total_mcap_usd": 2707354853307.147,
+    "total_vol_24h": 116495766315.50626,
+    "btc_dominance": 58.09344721642567,
+    "eth_dominance": 10.686431547543004,
+    "mcap_change_24h": 2.853619201220517,
     "active_cryptos": 17550
   },
   "fear_greed": {
@@ -567,21 +567,21 @@
     ]
   },
   "pi_cycle": {
-    "ma111": 75602.24445945949,
-    "ma350x2": 193761.69788571435,
-    "ratio": 0.3901815750192881,
+    "ma111": 75600.02761261264,
+    "ma350x2": 193760.29177142863,
+    "ratio": 0.3901729653761825,
     "crosses": []
   },
   "technicals": {
-    "current_price": 78806.64837236931,
-    "change_24h_pct": 3.2172733924374475,
-    "sma_200": 85886.88283053754,
-    "mayer_multiple": 0.9175632619926589,
-    "sma_111": 75605.50659434489,
-    "sma_350_x2": 193745.74807269408,
-    "pi_cycle_ratio": 0.390230533296542,
-    "daily_rsi": 66.4023205592471,
-    "weekly_rsi": 46.818141601232135
+    "current_price": 78558.75851547263,
+    "change_24h_pct": 2.8925988166374594,
+    "sma_200": 85885.64338125306,
+    "mayer_multiple": 0.914690225544963,
+    "sma_111": 75603.27335239085,
+    "sma_350_x2": 193744.3315592261,
+    "pi_cycle_ratio": 0.39022185962266226,
+    "daily_rsi": 65.95915934775508,
+    "weekly_rsi": 46.542883070184935
   },
   "funding_rate": null,
   "bgeometrics": {
@@ -708,8 +708,8 @@
       "price": 76350.25202878818
     },
     {
-      "ts": "2026-04-22T19:06:37+00:00",
-      "price": 78806.64837236931
+      "ts": "2026-04-22T22:57:32+00:00",
+      "price": 78558.75851547263
     }
   ]
 }
