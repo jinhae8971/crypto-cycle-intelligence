@@ -1,0 +1,113 @@
+name: pipeline
+
+# Runs the full CCI pipeline:
+#   - Every 6 hours (00:00, 06:00, 12:00, 18:00 UTC)
+#   - Plus: 23:30 UTC daily (08:30 KST) — the "main" daily report time
+#
+# What it does:
+#   1. Fetches all free APIs (CoinGecko, Alternative.me, BGeometrics,
+#      bitcoin.com, Bybit)
+#   2. Computes CCS score + 6-dimension breakdown
+#   3. Writes data/latest.json + data/history.json + data/snapshots/YYYY-MM-DD.json
+#   4. Commits JSON changes back to the repo (so GitHub Pages stays fresh)
+#   5. Sends Telegram report
+#   6. Triggers GitHub Pages deploy
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"     # every 6h
+    - cron: "30 23 * * *"     # 08:30 KST
+  workflow_dispatch:          # manual trigger
+
+# Only one pipeline run at a time (prevent commit races)
+concurrency:
+  group: cci-pipeline
+  cancel-in-progress: false
+
+permissions:
+  contents: write             # to commit JSON files
+  pages: write                # to deploy Pages
+  id-token: write             # for Pages deployment
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      pages_url: ${{ steps.pages_info.outputs.url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Need full history for commit back
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Resolve Pages URL
+        id: pages_info
+        run: |
+          PAGES_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+          echo "url=$PAGES_URL" >> $GITHUB_OUTPUT
+          echo "PAGES_URL=$PAGES_URL" >> $GITHUB_ENV
+
+      - name: Run pipeline
+        env:
+          TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          PAGES_URL: ${{ env.PAGES_URL }}
+          TZ: "Asia/Seoul"
+        run: python scripts/run_pipeline.py
+
+      - name: Commit JSON artifacts
+        run: |
+          git config user.name  "cci-bot[bot]"
+          git config user.email "cci-bot[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --staged --quiet; then
+            echo "No data changes to commit"
+          else
+            git commit -m "chore: pipeline update $(date -u '+%Y-%m-%dT%H:%MZ')"
+            git push
+          fi
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./docs/site
+          name: github-pages
+
+      - name: Notify on failure
+        if: failure()
+        env:
+          TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python - <<'EOF'
+          import os, requests
+          t = os.environ.get("TELEGRAM_TOKEN", "")
+          c = os.environ.get("TELEGRAM_CHAT_ID", "")
+          if t and c:
+              requests.post(
+                  f"https://api.telegram.org/bot{t}/sendMessage",
+                  json={"chat_id": c,
+                        "text": "❌ CCI pipeline failed.\nCheck: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"},
+                  timeout=10)
+          EOF
+
+  deploy:
+    needs: ingest
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
