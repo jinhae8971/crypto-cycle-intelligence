@@ -150,29 +150,29 @@
     "btc_change_24h": -0.11205788154818874
   },
   {
-    "ts": "2026-04-26T02:14:35.661434+00:00",
-    "ccs": 27.76,
+    "ts": "2026-04-26T21:28:21.990790+00:00",
+    "ccs": 30.27,
     "phase": "Accumulation",
     "dimensions": {
-      "valuation": 26.49,
-      "onchain": 15.29,
+      "valuation": 26.43,
+      "onchain": 22.79,
       "sentiment": 28.75,
       "derivatives": null,
       "macro": null,
-      "technical": 45.5
+      "technical": 48.15
     },
     "indicators_raw": {
-      "pi_cycle_ratio": 0.388798641221793,
-      "mvrv_zscore": 0.8254,
-      "puell_multiple": 0.8296,
-      "nupl": 0.3081183701443415,
-      "sopr": 0.9834,
-      "mayer_multiple": 0.9125101527092807,
-      "weekly_rsi": 45.378936801599224,
-      "daily_rsi": 62.30995171719692,
+      "pi_cycle_ratio": 0.3888240734021783,
+      "mvrv_zscore": 0.8009,
+      "puell_multiple": 0.7772,
+      "nupl": 0.30407396998615,
+      "sopr": 1.0001,
+      "mayer_multiple": 0.9211351483563008,
+      "weekly_rsi": 46.22364367967485,
+      "daily_rsi": 64.25718659647367,
       "fear_greed_index": 33
     },
-    "btc_price": 77538.16157709267,
-    "btc_change_24h": -0.10433073509952262
+    "btc_price": 78274.43906015898,
+    "btc_change_24h": 0.844246461465259
   }
 ]
