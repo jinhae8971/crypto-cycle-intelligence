@@ -1,8 +1,6 @@
 name: pipeline
 
-# Runs the full CCI pipeline:
-#   - Every 6 hours (00:00, 06:00, 12:00, 18:00 UTC)
-#   - Plus: 23:30 UTC daily (08:30 KST) — the "main" daily report time
+# Runs the full CCI pipeline once daily at 22:00 UTC (07:00 KST).
 #
 # What it does:
 #   1. Fetches all free APIs (CoinGecko, Alternative.me, BGeometrics,
@@ -15,8 +13,7 @@ name: pipeline
 
 on:
   schedule:
-    - cron: "0 */6 * * *"     # every 6h
-    - cron: "30 23 * * *"     # 08:30 KST
+    - cron: "0 22 * * *"      # daily 07:00 KST
   workflow_dispatch:          # manual trigger
 
 # Only one pipeline run at a time (prevent commit races)
