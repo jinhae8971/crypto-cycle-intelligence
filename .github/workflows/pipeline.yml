@@ -1,6 +1,7 @@
 name: pipeline
 
-# Runs the full CCI pipeline once daily at 22:00 UTC (07:00 KST).
+# Runs the full CCI pipeline once daily at 21:00 UTC (06:00 KST).
+# Telegram reports are sent only on the scheduled Saturday 06:00 KST run.
 #
 # What it does:
 #   1. Fetches all free APIs (CoinGecko, Alternative.me, BGeometrics,
@@ -8,13 +9,13 @@ name: pipeline
 #   2. Computes CCS score + 6-dimension breakdown
 #   3. Writes data/latest.json + data/history.json + data/snapshots/YYYY-MM-DD.json
 #   4. Commits JSON changes back to the repo (so GitHub Pages stays fresh)
-#   5. Sends Telegram report
+#   5. Sends Telegram report on Saturdays only
 #   6. Triggers GitHub Pages deploy
 
 on:
   schedule:
-    - cron: "0 22 * * *"      # daily 07:00 KST
-  workflow_dispatch:          # manual trigger
+    - cron: "0 21 * * *"      # daily 06:00 KST
+  workflow_dispatch:          # manual trigger, no Telegram by default
 
 # Only one pipeline run at a time (prevent commit races)
 concurrency:
@@ -44,6 +45,17 @@ jobs:
           python-version: "3.11"
           cache: pip
 
+      - name: Determine Telegram delivery
+        id: telegram_gate
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$(TZ=Asia/Seoul date +%u)" = "6" ]; then
+            echo "send=true" >> "$GITHUB_OUTPUT"
+            echo "Telegram report enabled for Saturday 06:00 KST"
+          else
+            echo "send=false" >> "$GITHUB_OUTPUT"
+            echo "Telegram report disabled for this run"
+          fi
+
       - name: Install deps
         run: pip install -r requirements.txt
 
@@ -58,9 +70,14 @@ jobs:
         env:
           TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SEND_TELEGRAM:    ${{ steps.telegram_gate.outputs.send }}
           PAGES_URL: ${{ env.PAGES_URL }}
           TZ: "Asia/Seoul"
-        run: python scripts/run_pipeline.py
+        run: |
+          if [ "$SEND_TELEGRAM" != "true" ]; then
+            unset TELEGRAM_TOKEN TELEGRAM_CHAT_ID
+          fi
+          python scripts/run_pipeline.py
 
       - name: Run backtest
         env:
@@ -94,7 +111,7 @@ jobs:
           name: github-pages
 
       - name: Notify on failure
-        if: failure()
+        if: failure() && steps.telegram_gate.outputs.send == 'true'
         env:
           TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
