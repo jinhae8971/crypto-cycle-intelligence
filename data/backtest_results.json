@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-05-22T21:56:32.339241+00:00",
+  "generated_at": "2026-05-23T21:42:33.407038+00:00",
   "backtest_window": {
     "start": "2016-01-01",
-    "end": "2026-05-22",
-    "n_days": 3795
+    "end": "2026-05-23",
+    "n_days": 3796
   },
   "indicators_used": [
     "pi_cycle_ratio",
@@ -114,14 +114,14 @@
   "ccs_stats": {
     "min": 0.0,
     "max": 100.0,
-    "mean": 39.84,
+    "mean": 39.83,
     "std": 17.28,
     "median": 38.13
   },
   "phase_distribution_pct": {
     "Deep Bottom": 12.02,
-    "Accumulation": 42.15,
-    "Mid-Cycle": 32.95,
+    "Accumulation": 42.16,
+    "Mid-Cycle": 32.94,
     "Late Markup": 10.36,
     "Distribution": 2.53
   },
@@ -2838,8 +2838,8 @@
     },
     {
       "ts": "2026-05-24",
-      "ccs": 20.24,
-      "btc": 75914.0
+      "ccs": 23.11,
+      "btc": 76500.0
     }
   ],
   "model_version": "1.0",

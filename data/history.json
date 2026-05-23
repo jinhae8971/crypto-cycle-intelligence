@@ -746,5 +746,31 @@
     },
     "btc_price": 75953.9436900729,
     "btc_change_24h": -2.053474104769959
+  },
+  {
+    "ts": "2026-05-23T21:42:32.262256+00:00",
+    "ccs": 24.59,
+    "phase": "Accumulation",
+    "dimensions": {
+      "valuation": 26.26,
+      "onchain": 20.87,
+      "sentiment": 22.5,
+      "derivatives": null,
+      "macro": null,
+      "technical": 28.88
+    },
+    "indicators_raw": {
+      "pi_cycle_ratio": 0.3830741129227934,
+      "mvrv_zscore": 0.7997,
+      "puell_multiple": 0.8745,
+      "nupl": 0.2888,
+      "sopr": 0.9931,
+      "mayer_multiple": 0.9492232381198622,
+      "weekly_rsi": 44.19806072991312,
+      "daily_rsi": 45.0684629380514,
+      "fear_greed_index": 28
+    },
+    "btc_price": 76564.0190985834,
+    "btc_change_24h": 1.4327757533624919
   }
 ]
